@@ -17,7 +17,7 @@ import {
   Layers,
   Handshake,
 } from "lucide-react";
-import { Button, XIcon } from "@/components";
+import { Button, XIcon, InstagramIcon } from "@/components";
 
 const navLinks = [
   { label: "Services", href: "#services" },
@@ -385,7 +385,10 @@ export default function Home() {
           </a>
 
           <div className="flex items-center gap-2">
-            {[{ label: "X", href: "https://x.com/foundhouseteam", icon: XIcon }].map(({ label, href, icon: Icon }) => (
+            {[
+              { label: "X", href: "https://x.com/foundhouseteam", icon: XIcon },
+              { label: "Instagram", href: "https://instagram.com/teamfoundhouse", icon: InstagramIcon },
+            ].map(({ label, href, icon: Icon }) => (
               <a
                 key={label}
                 href={href}
