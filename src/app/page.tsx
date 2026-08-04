@@ -79,6 +79,23 @@ const projects = [
   },
 ];
 
+const founders = [
+  {
+    name: "Kameron Seabrook",
+    role: "Founder",
+    bio: "Founder of Obai and a serial entrepreneur, Kameron leads product vision and business strategy, turning early ideas into funded, fielded companies.",
+    photo: "/images/founder-kameron.png",
+    linkedin: "https://www.linkedin.com/in/kameron-seabrook/",
+  },
+  {
+    name: "Adeyemi Taiwo",
+    role: "Lead Engineer",
+    bio: "A full-stack engineer building production web and mobile systems, leading engineering across every Foundhouse build.",
+    photo: "/images/founder-adeyemi.jpeg",
+    linkedin: "https://www.linkedin.com/in/adeyemi-taiwo-5892082b0/",
+  },
+];
+
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const } },
@@ -272,10 +289,9 @@ export default function Home() {
               </Reveal>
             </div>
 
-            <Reveal delay={0.1} className="grid grid-cols-3 gap-4">
+            <Reveal delay={0.1} className="grid grid-cols-2 gap-4">
               {[
-                { value: "2", label: "Products Shipped" },
-                { value: "7", label: "Stage Process" },
+                { value: "3", label: "Products Shipped" },
                 { value: "100%", label: "Senior Engineers" },
               ].map((stat) => (
                 <div key={stat.label} className="flex flex-col gap-2 rounded-xl border border-border-subtle bg-surface/60 p-6 text-center">
@@ -284,6 +300,34 @@ export default function Home() {
                 </div>
               ))}
             </Reveal>
+          </div>
+
+          <div className="relative mx-auto mt-20 w-full max-w-7xl px-6 lg:px-10">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+              {founders.map((founder, i) => (
+                <Reveal key={founder.name} delay={i * 0.1}>
+                  <div className="flex h-full items-center gap-5 rounded-2xl border border-border-subtle bg-surface/60 p-6">
+                    <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-full border border-border-strong">
+                      <Image src={founder.photo} alt={founder.name} fill className="object-cover" />
+                    </div>
+                    <div className="flex flex-col gap-1">
+                      <h3 className="font-display text-lg font-semibold tracking-tight">{founder.name}</h3>
+                      <p className="text-sm text-gold-bright">{founder.role}</p>
+                      <p className="text-sm leading-relaxed text-foreground-muted">{founder.bio}</p>
+                      <a
+                        href={founder.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-2 inline-flex w-fit items-center gap-1.5 text-xs font-medium text-foreground-faint hover:text-gold-bright"
+                      >
+                        LinkedIn
+                        <ArrowUpRight className="h-3 w-3" />
+                      </a>
+                    </div>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
           </div>
         </section>
 
