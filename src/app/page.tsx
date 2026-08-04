@@ -60,13 +60,22 @@ const projects = [
     name: "Kept House",
     category: "Estate Transition Platform",
     description: "A digital platform that guides families through the estate transition process with clarity, structure, and care.",
-    tags: ["Next.js", "Supabase", "AI"],
+    thumbnail: "/images/project-kept-house.png",
+    href: "https://www.keptestate.com/",
   },
   {
     name: "AFMS",
     category: "Farm Workforce & Operations Management System",
-    description: "A mobile and web platform that tracks worker attendance and task output at block level, automates earnings from verified output, and gives management real-time visibility into labor cost, equipment, and crop cycles across multiple farms.",
-    tags: ["React", "Node.js", "PostgreSQL", "GPS Tracking"],
+    description: "An internal platform that tracks worker attendance and output, automates earnings, and gives managers real-time visibility across every farm.",
+    thumbnail: "/images/project-afms.png",
+    href: null,
+  },
+  {
+    name: "Obai",
+    category: "AI Vehicle Valuation & Claims Platform",
+    description: "An AI toolbox for car owners, fleet operators, and appraisers to value vehicles, label photos, and close claims in minutes.",
+    thumbnail: "/images/project-obai.png",
+    href: "https://obai.app/",
   },
 ];
 
@@ -311,28 +320,42 @@ export default function Home() {
               description="A look at the platforms our team has designed, engineered, and shipped for founders and growing businesses."
             />
 
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-              {projects.map((project, i) => (
-                <Reveal key={project.name} delay={i * 0.1}>
-                  <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border-subtle bg-surface/60 hover:border-gold-400">
-                    <div className="bg-grid relative flex h-48 items-center justify-center overflow-hidden border-b border-border-subtle bg-background-elevated">
-                      <span className="font-display text-4xl font-bold tracking-tight text-foreground/10">{project.name}</span>
-                    </div>
-                    <div className="flex flex-1 flex-col gap-3 p-7">
-                      <span className="text-xs font-medium uppercase tracking-[0.15em] text-gold-bright">{project.category}</span>
-                      <h3 className="font-display text-2xl font-semibold tracking-tight">{project.name}</h3>
-                      <p className="text-sm leading-relaxed text-foreground-muted">{project.description}</p>
-                      <div className="mt-1 flex flex-wrap gap-2">
-                        {project.tags.map((tag) => (
-                          <span key={tag} className="rounded-full border border-border-subtle px-2.5 py-1 text-xs text-foreground-faint">
-                            {tag}
-                          </span>
-                        ))}
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {projects.map((project, i) => {
+                const CardTag = project.href ? "a" : "div";
+                return (
+                  <Reveal key={project.name} delay={i * 0.1}>
+                    <CardTag
+                      {...(project.href ? { href: project.href, target: "_blank", rel: "noopener noreferrer" } : {})}
+                      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border-subtle bg-surface/60 hover:border-gold-400"
+                    >
+                      <div className="relative h-48 overflow-hidden border-b border-border-subtle bg-background-elevated">
+                        <Image
+                          src={project.thumbnail}
+                          alt={`${project.name} product screenshot`}
+                          fill
+                          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                          className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                        />
                       </div>
-                    </div>
-                  </div>
-                </Reveal>
-              ))}
+                      <div className="flex flex-1 flex-col gap-3 p-7">
+                        <div className="flex items-center justify-between gap-3">
+                          <span className="text-xs font-medium uppercase tracking-[0.15em] text-gold-bright">{project.category}</span>
+                          {project.href ? (
+                            <ArrowUpRight className="h-4 w-4 shrink-0 text-foreground-faint transition-colors group-hover:text-gold-bright" />
+                          ) : (
+                            <span className="shrink-0 rounded-full border border-border-subtle px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-foreground-faint">
+                              Internal Tool
+                            </span>
+                          )}
+                        </div>
+                        <h3 className="font-display text-2xl font-semibold tracking-tight">{project.name}</h3>
+                        <p className="text-sm leading-relaxed text-foreground-muted">{project.description}</p>
+                      </div>
+                    </CardTag>
+                  </Reveal>
+                );
+              })}
             </div>
           </div>
         </section>
