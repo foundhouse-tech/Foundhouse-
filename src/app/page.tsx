@@ -98,7 +98,7 @@ export default function Home() {
           <HeroGlow />
           <div className="relative mx-auto flex w-full max-w-7xl flex-col items-center gap-8 px-6 text-center lg:px-10">
             <HeroItem>
-              <Eyebrow>Software &amp; AI Studio for Founders</Eyebrow>
+              <Eyebrow>Software &amp; Development Studio for Founders</Eyebrow>
             </HeroItem>
             <HeroItem delay={0.1}>
               <h1 className="font-display max-w-4xl text-5xl font-semibold leading-[1.05] tracking-tight text-balance sm:text-6xl lg:text-7xl">
@@ -181,7 +181,7 @@ export default function Home() {
               </Reveal>
               <Reveal delay={0.2}>
                 <p className="max-w-lg text-base leading-relaxed text-foreground-muted sm:text-lg">
-                  Foundhouse is a software and AI studio built for startups and growing businesses. We pair senior engineering with thoughtful design to build products on a foundation that lasts.
+                  Foundhouse is a software and development studio built for startups and growing businesses. We pair senior engineering with thoughtful design to build products on a foundation that lasts.
                 </p>
               </Reveal>
             </div>

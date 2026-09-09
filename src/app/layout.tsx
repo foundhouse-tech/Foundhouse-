@@ -8,7 +8,7 @@ const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope", displa
 export const metadata: Metadata = {
   title: "Foundhouse — Building Digital Foundations.",
   description:
-    "Foundhouse is a software and AI studio for founders. We help founders turn ideas into world-class digital products.",
+    "Foundhouse is a software and development studio for founders. We help founders turn ideas into world-class digital products.",
   metadataBase: new URL(process.env.SITE_URL ?? "https://foundhouse.tech"),
   openGraph: {
     title: "Foundhouse — Building Digital Foundations.",
