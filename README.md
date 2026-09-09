@@ -4,7 +4,7 @@ Marketing site for [foundhouse.tech](https://foundhouse.tech), rebuilt as a Next
 
 ## Stack
 
-Next.js (App Router, TypeScript), Tailwind CSS v4, `next/font` for Inter + Manrope. No database, no external services — a single Node process.
+Next.js (App Router, TypeScript), Tailwind CSS v4, `next/font` for Inter + Manrope. No database, no external services, a single Node process.
 
 ## Local
 
@@ -18,10 +18,10 @@ npm run build && npm run start
 
 | Path | What |
 | --- | --- |
-| `src/lib/site.ts` | All copy, links and the `START_URL` constant (where every CTA points). |
-| `src/app/page.tsx` | Home page — hero, services, about, why, featured work, closing CTA. |
+| `src/lib/site.ts` | `START_URL`, where the project CTAs point. |
+| `src/app/page.tsx` | Home page: hero, services, about, why, featured work, closing CTA. |
 | `src/app/start/page.tsx` | Project entry point. Phase 1 placeholder; the qualification form mounts here in Phase 2. |
-| `src/components/` | Header, Footer, Logo, Eyebrow, Reveal (scroll fade-in), Icons. |
+| `src/components/` | Header, Footer, motion (framer-motion reveals). |
 | `public/images/` | Logo, team photos, product screenshots. |
 
 ## Deploy (Railway)
