@@ -5,7 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Book a Consultation — Foundhouse",
+  title: "Book a Consultation | Foundhouse",
   description: "Tell us about your project and we'll match you with the right person on the Foundhouse team.",
 };
 
