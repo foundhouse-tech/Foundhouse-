@@ -1,13 +1,91 @@
 import Image from "next/image";
 import Link from "next/link";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  BrainCircuit,
+  CodeXml,
+  Globe,
+  Handshake,
+  Layers,
+  Smartphone,
+  Sparkles,
+  Zap,
+} from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import Eyebrow from "@/components/Eyebrow";
-import Reveal from "@/components/Reveal";
-import { ArrowRight, ArrowUpRight, iconMap } from "@/components/Icons";
-import { START_URL, projects, reasons, services, stats, team } from "@/lib/site";
+import { HeroGlow, HeroItem, Reveal, Tap } from "@/components/motion";
+import { START_URL } from "@/lib/site";
 
-const container = "mx-auto max-w-[1050px] px-6";
+const btnPrimary =
+  "group inline-flex h-12 items-center justify-center gap-2 whitespace-nowrap rounded-full px-6 text-sm font-medium transition-all duration-300 active:scale-[0.98] bg-gold text-background hover:bg-gold-bright hover:shadow-[0_0_24px_4px_rgba(205,154,77,0.35)]";
+const btnSecondary =
+  "group inline-flex h-12 items-center justify-center gap-2 whitespace-nowrap rounded-full px-6 text-sm font-medium transition-all duration-300 active:scale-[0.98] border border-border-strong bg-surface text-foreground hover:bg-surface-hover hover:border-gold-400";
+
+function Eyebrow({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="inline-flex items-center gap-2 rounded-full border border-border-strong bg-surface/60 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-gold-bright">
+      <span className="h-1.5 w-1.5 rounded-full bg-gold" />
+      {children}
+    </div>
+  );
+}
+
+const services = [
+  { Icon: BrainCircuit, title: "AI Solutions", body: "Custom AI products, LLM integrations, and intelligent automation that give your business a genuine edge." },
+  { Icon: CodeXml, title: "Custom Software", body: "Bespoke software engineered around how your business actually operates — not the other way around." },
+  { Icon: Globe, title: "Web Applications", body: "Fast, scalable, beautifully engineered web apps built on modern frameworks and best practices." },
+  { Icon: Smartphone, title: "Mobile Applications", body: "Native-feel mobile experiences for iOS and Android from a single, maintainable codebase." },
+];
+
+const team = [
+  {
+    name: "Kameron Seabrook",
+    role: "Founder",
+    bio: "Founder of Obai and a serial entrepreneur, Kameron leads product vision and business strategy, turning early ideas into funded, fielded companies.",
+    image: "/images/founder-kameron.png",
+    linkedin: "https://www.linkedin.com/in/kameron-seabrook/",
+  },
+  {
+    name: "Adeyemi Taiwo",
+    role: "Lead Engineer",
+    bio: "A full-stack engineer building production web and mobile systems, leading engineering across every Foundhouse build.",
+    image: "/images/founder-adeyemi.jpeg",
+    linkedin: "https://www.linkedin.com/in/adeyemi-taiwo-5892082b0/",
+  },
+];
+
+const reasons = [
+  { Icon: Zap, title: "Fast Delivery", body: "Structured sprints and clear milestones mean your product ships on time." },
+  { Icon: Sparkles, title: "Modern Technology", body: "Battle-tested, current tools — no legacy stacks or outdated patterns." },
+  { Icon: Layers, title: "Scalable Solutions", body: "We build for where you're going, not just where you are today." },
+  { Icon: Handshake, title: "Long-Term Partnership", body: "We stay involved after launch — as a partner, not a vendor." },
+];
+
+const projects = [
+  {
+    tag: "Estate Transition Platform",
+    name: "Kept House",
+    body: "A digital platform that guides families through the estate transition process with clarity, structure, and care.",
+    image: "/images/project-kept-house.png",
+    href: "https://www.keptestate.com/",
+  },
+  {
+    tag: "Farm Workforce & Operations Management System",
+    badge: "Internal Tool",
+    name: "AFMS",
+    body: "An internal platform that tracks worker attendance and output, automates earnings, and gives managers real-time visibility across every farm.",
+    image: "/images/project-afms.png",
+    href: null,
+  },
+  {
+    tag: "AI Vehicle Valuation & Claims Platform",
+    name: "Obai",
+    body: "An AI toolbox for car owners, fleet operators, and appraisers to value vehicles, label photos, and close claims in minutes.",
+    image: "/images/project-obai.png",
+    href: "https://obai.app/",
+  },
+];
 
 export default function Home() {
   return (
@@ -15,111 +93,131 @@ export default function Home() {
       <Header />
       <main>
         {/* Hero */}
-        <section className="relative flex min-h-[100svh] items-center overflow-hidden pt-28 pb-20">
-          <div className="grid-bg absolute inset-0" aria-hidden />
-          <div className="glow absolute inset-0" aria-hidden />
-          <div className={`${container} relative w-full text-center`}>
-            <Reveal>
+        <section className="relative flex min-h-[92vh] items-center overflow-hidden pt-28">
+          <div aria-hidden="true" className="bg-grid pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_70%_60%_at_50%_20%,black,transparent)]" />
+          <HeroGlow />
+          <div className="relative mx-auto flex w-full max-w-7xl flex-col items-center gap-8 px-6 text-center lg:px-10">
+            <HeroItem>
               <Eyebrow>Software &amp; AI Studio for Founders</Eyebrow>
-            </Reveal>
-            <Reveal delay={80}>
-              <h1 className="font-display mx-auto mt-7 max-w-4xl text-[52px] font-semibold leading-[1.02] sm:text-[72px] md:text-[84px]">
+            </HeroItem>
+            <HeroItem delay={0.1}>
+              <h1 className="font-display max-w-4xl text-5xl font-semibold leading-[1.05] tracking-tight text-balance sm:text-6xl lg:text-7xl">
                 Building Digital
                 <br />
-                <span className="text-gold">Foundations.</span>
+                <span className="text-gradient-gold">Foundations.</span>
               </h1>
-            </Reveal>
-            <Reveal delay={160}>
-              <p className="mx-auto mt-7 max-w-xl text-lg text-muted">
+            </HeroItem>
+            <HeroItem delay={0.2}>
+              <p className="max-w-2xl text-balance text-lg text-foreground-muted sm:text-xl">
                 We help founders turn ideas into world-class digital products.
               </p>
-            </Reveal>
-            <Reveal delay={240}>
-              <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-                <Link
-                  href={START_URL}
-                  className="inline-flex items-center gap-2 rounded-full bg-gold px-7 py-3.5 text-[14px] font-semibold text-[#1a1408] transition-colors hover:bg-gold-bright"
-                >
-                  Start Your Project <ArrowRight className="h-4 w-4" />
+            </HeroItem>
+            <HeroItem delay={0.3} className="flex flex-col items-center gap-4 sm:flex-row">
+              <Tap>
+                <Link className={`${btnPrimary} h-13 px-8 text-base`} href={START_URL}>
+                  Start Your Project
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
-                <Link
-                  href="#projects"
-                  className="inline-flex items-center gap-2 rounded-full border border-border-strong bg-surface/60 px-7 py-3.5 text-[14px] font-semibold text-foreground transition-colors hover:bg-surface-hover"
-                >
-                  View Our Work <ArrowUpRight />
-                </Link>
-              </div>
-            </Reveal>
-            <Reveal delay={320}>
-              <p className="mt-9 text-[13px] text-faint">Trusted by startups and growing businesses.</p>
-            </Reveal>
+              </Tap>
+              <Tap>
+                <a className={`${btnSecondary} h-13 px-8 text-base`} href="#projects">
+                  View Our Work
+                  <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                </a>
+              </Tap>
+            </HeroItem>
+            <HeroItem delay={0.4}>
+              <p className="text-sm text-foreground-faint">Trusted by startups and growing businesses.</p>
+            </HeroItem>
           </div>
         </section>
 
         {/* Services */}
-        <section id="services" className="scroll-mt-24 py-24">
-          <div className={container}>
-            <Reveal className="text-center">
-              <Eyebrow>What we do</Eyebrow>
-              <h2 className="font-display mx-auto mt-6 max-w-2xl text-4xl font-semibold leading-[1.08] sm:text-5xl">
-                End-to-end product engineering, under one roof.
-              </h2>
-              <p className="mx-auto mt-5 max-w-xl text-[17px] text-muted">
-                From first concept to production launch, we bring the full range of skills founders need to ship something exceptional.
-              </p>
-            </Reveal>
-            <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {services.map((s, i) => {
-                const Icon = iconMap[s.icon];
-                return (
-                  <Reveal key={s.title} delay={i * 80} className="rounded-[var(--radius-lg)] border border-border-subtle bg-surface p-6 transition-colors hover:border-border-strong hover:bg-surface-hover">
-                    <span className="flex h-10 w-10 items-center justify-center rounded-full border border-border-subtle bg-gold-050 text-gold">
-                      <Icon className="h-[18px] w-[18px]" />
-                    </span>
-                    <h3 className="font-display mt-7 text-[17px] font-semibold">{s.title}</h3>
-                    <p className="mt-2.5 text-[13.5px] leading-relaxed text-muted">{s.body}</p>
-                  </Reveal>
-                );
-              })}
+        <section id="services" className="relative scroll-mt-24 py-28 sm:py-36">
+          <div className="mx-auto flex w-full max-w-7xl flex-col gap-16 px-6 lg:px-10">
+            <div className="flex flex-col items-center gap-5 text-center">
+              <Reveal>
+                <Eyebrow>What We Do</Eyebrow>
+              </Reveal>
+              <Reveal delay={0.1}>
+                <h2 className="font-display max-w-2xl text-3xl font-semibold tracking-tight text-balance sm:text-4xl lg:text-5xl">
+                  End-to-end product engineering, under one roof.
+                </h2>
+              </Reveal>
+              <Reveal delay={0.2}>
+                <p className="mx-auto max-w-xl text-base text-foreground-muted sm:text-lg">
+                  From first concept to production launch, we bring the full range of skills founders need to ship something exceptional.
+                </p>
+              </Reveal>
+            </div>
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {services.map(({ Icon, title, body }, i) => (
+                <Reveal key={title} delay={i * 0.1}>
+                  <div className="group relative h-full overflow-hidden rounded-xl border border-border-subtle bg-surface/60 p-7 transition-colors hover:border-gold-400">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-border-strong bg-background-elevated text-gold-bright">
+                      <Icon className="h-5 w-5" strokeWidth={1.75} aria-hidden="true" />
+                    </div>
+                    <h3 className="font-display mt-4 text-xl font-semibold tracking-tight">{title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-foreground-muted">{body}</p>
+                  </div>
+                </Reveal>
+              ))}
             </div>
           </div>
         </section>
 
         {/* About */}
-        <section id="about" className="scroll-mt-24 py-24">
-          <div className={container}>
-            <div className="grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-center">
+        <section id="about" className="relative scroll-mt-24 overflow-hidden py-28 sm:py-36">
+          <div aria-hidden="true" className="pointer-events-none absolute left-0 top-1/2 h-96 w-96 -translate-y-1/2 rounded-full bg-gold/10 blur-[140px]" />
+          <div className="relative mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-14 px-6 lg:grid-cols-2 lg:px-10">
+            <div className="flex flex-col gap-6">
               <Reveal>
                 <Eyebrow>About Foundhouse</Eyebrow>
-                <h2 className="font-display mt-6 text-4xl font-semibold leading-[1.08] sm:text-5xl">
+              </Reveal>
+              <Reveal delay={0.1}>
+                <h2 className="font-display max-w-xl text-3xl font-semibold tracking-tight text-balance sm:text-4xl lg:text-5xl">
                   We help founders turn ideas into successful digital products.
                 </h2>
-                <p className="mt-6 max-w-lg text-[17px] leading-relaxed text-muted">
+              </Reveal>
+              <Reveal delay={0.2}>
+                <p className="max-w-lg text-base leading-relaxed text-foreground-muted sm:text-lg">
                   Foundhouse is a software and AI studio built for startups and growing businesses. We pair senior engineering with thoughtful design to build products on a foundation that lasts.
                 </p>
               </Reveal>
-              <Reveal delay={120} className="grid grid-cols-2 gap-4">
-                {stats.map((s) => (
-                  <div key={s.label} className="rounded-[var(--radius-lg)] border border-border-subtle bg-surface p-7 text-center">
-                    <div className="font-display text-5xl font-semibold text-gold">{s.value}</div>
-                    <div className="mt-2 text-[13px] text-muted">{s.label}</div>
-                  </div>
-                ))}
-              </Reveal>
             </div>
-            <div className="mt-14 grid gap-5 md:grid-cols-2">
+            <Reveal delay={0.2} className="grid grid-cols-2 gap-4">
+              <div className="flex flex-col gap-2 rounded-xl border border-border-subtle bg-surface/60 p-6 text-center">
+                <span className="font-display text-3xl font-semibold text-gradient-gold sm:text-4xl">3</span>
+                <span className="text-xs text-foreground-faint">Products Shipped</span>
+              </div>
+              <div className="flex flex-col gap-2 rounded-xl border border-border-subtle bg-surface/60 p-6 text-center">
+                <span className="font-display text-3xl font-semibold text-gradient-gold sm:text-4xl">100%</span>
+                <span className="text-xs text-foreground-faint">Senior Engineers</span>
+              </div>
+            </Reveal>
+          </div>
+          <div className="relative mx-auto mt-20 w-full max-w-7xl px-6 lg:px-10">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               {team.map((m, i) => (
-                <Reveal key={m.name} delay={i * 100} className="flex gap-6 rounded-[var(--radius-lg)] border border-border-subtle bg-surface p-6">
-                  <span className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full border border-border-strong">
-                    <Image src={m.image} alt={m.name} fill sizes="64px" className="object-cover" />
-                  </span>
-                  <div>
-                    <h3 className="font-display text-[17px] font-semibold">{m.name}</h3>
-                    <p className="mt-0.5 text-[13px] text-gold">{m.role}</p>
-                    <p className="mt-3 text-[13.5px] leading-relaxed text-muted">{m.bio}</p>
-                    <a href={m.linkedin} target="_blank" rel="noreferrer" className="mt-4 inline-flex items-center gap-1 text-[12px] text-faint transition-colors hover:text-foreground">
-                      LinkedIn <ArrowUpRight className="h-3 w-3" />
-                    </a>
+                <Reveal key={m.name} delay={i * 0.1}>
+                  <div className="flex h-full items-center gap-5 rounded-2xl border border-border-subtle bg-surface/60 p-6">
+                    <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-full border border-border-strong">
+                      <Image alt={m.name} fill sizes="100vw" className="object-cover" src={m.image} />
+                    </div>
+                    <div className="flex flex-col gap-1">
+                      <h3 className="font-display text-lg font-semibold tracking-tight">{m.name}</h3>
+                      <p className="text-sm text-gold-bright">{m.role}</p>
+                      <p className="text-sm leading-relaxed text-foreground-muted">{m.bio}</p>
+                      <a
+                        href={m.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-2 inline-flex w-fit items-center gap-1.5 text-xs font-medium text-foreground-faint hover:text-gold-bright"
+                      >
+                        LinkedIn
+                        <ArrowUpRight className="h-3 w-3" aria-hidden="true" />
+                      </a>
+                    </div>
                   </div>
                 </Reveal>
               ))}
@@ -128,70 +226,92 @@ export default function Home() {
         </section>
 
         {/* Why Foundhouse */}
-        <section className="py-24">
-          <div className={container}>
-            <Reveal className="text-center">
-              <Eyebrow>Why Foundhouse</Eyebrow>
-              <h2 className="font-display mx-auto mt-6 max-w-xl text-4xl font-semibold leading-[1.08] sm:text-5xl">
-                A studio built on trust and craft.
-              </h2>
-              <p className="mx-auto mt-5 max-w-xl text-[17px] text-muted">
-                We treat every engagement like it&apos;s our own product — because your success is how we measure ours.
-              </p>
-            </Reveal>
-            <Reveal delay={120} className="mt-14 grid overflow-hidden rounded-[var(--radius-lg)] border border-border-subtle bg-surface sm:grid-cols-2 lg:grid-cols-4">
-              {reasons.map((r) => {
-                const Icon = iconMap[r.icon];
-                return (
-                  <div key={r.title} className="border-border-subtle p-7 [&:not(:first-child)]:border-t sm:[&:nth-child(2)]:border-t-0 sm:[&:nth-child(even)]:border-l lg:[&:not(:first-child)]:border-t-0 lg:[&:not(:first-child)]:border-l">
-                    <Icon className="h-5 w-5 text-gold" />
-                    <h3 className="font-display mt-6 text-[16px] font-semibold">{r.title}</h3>
-                    <p className="mt-2.5 text-[13.5px] leading-relaxed text-muted">{r.body}</p>
+        <section className="relative overflow-hidden py-28 sm:py-36">
+          <div aria-hidden="true" className="pointer-events-none absolute right-0 top-1/2 h-105 w-105 -translate-y-1/2 rounded-full bg-gold/10 blur-[140px]" />
+          <div className="relative mx-auto flex w-full max-w-7xl flex-col gap-16 px-6 lg:px-10">
+            <div className="flex flex-col items-center gap-5 text-center">
+              <Reveal>
+                <Eyebrow>Why Foundhouse</Eyebrow>
+              </Reveal>
+              <Reveal delay={0.1}>
+                <h2 className="font-display max-w-2xl text-3xl font-semibold tracking-tight text-balance sm:text-4xl lg:text-5xl">
+                  A studio built on trust and craft.
+                </h2>
+              </Reveal>
+              <Reveal delay={0.2}>
+                <p className="mx-auto max-w-xl text-base text-foreground-muted sm:text-lg">
+                  We treat every engagement like it&apos;s our own product — because your success is how we measure ours.
+                </p>
+              </Reveal>
+            </div>
+            <div className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-border-subtle bg-border-subtle sm:grid-cols-2 lg:grid-cols-4">
+              {reasons.map(({ Icon, title, body }, i) => (
+                <Reveal key={title} delay={i * 0.1}>
+                  <div className="flex h-full flex-col gap-4 bg-background p-8 transition-colors hover:bg-surface">
+                    <Icon className="h-6 w-6 text-gold-bright" strokeWidth={1.75} aria-hidden="true" />
+                    <h3 className="font-display text-lg font-semibold tracking-tight">{title}</h3>
+                    <p className="text-sm leading-relaxed text-foreground-muted">{body}</p>
                   </div>
-                );
-              })}
-            </Reveal>
+                </Reveal>
+              ))}
+            </div>
           </div>
         </section>
 
         {/* Featured work */}
-        <section id="projects" className="scroll-mt-24 py-24">
-          <div className={container}>
-            <Reveal className="text-center">
-              <Eyebrow>Featured work</Eyebrow>
-              <h2 className="font-display mx-auto mt-6 max-w-xl text-4xl font-semibold leading-[1.08] sm:text-5xl">
-                Products we&apos;ve helped bring to life.
-              </h2>
-              <p className="mx-auto mt-5 max-w-xl text-[17px] text-muted">
-                A look at the platforms our team has designed, engineered, and shipped for founders and growing businesses.
-              </p>
-            </Reveal>
-            <div className="mt-14 grid gap-5 md:grid-cols-3">
+        <section id="projects" className="relative scroll-mt-24 py-28 sm:py-36">
+          <div className="mx-auto flex w-full max-w-7xl flex-col gap-16 px-6 lg:px-10">
+            <div className="flex flex-col items-center gap-5 text-center">
+              <Reveal>
+                <Eyebrow>Featured Work</Eyebrow>
+              </Reveal>
+              <Reveal delay={0.1}>
+                <h2 className="font-display max-w-2xl text-3xl font-semibold tracking-tight text-balance sm:text-4xl lg:text-5xl">
+                  Products we&apos;ve helped bring to life.
+                </h2>
+              </Reveal>
+              <Reveal delay={0.2}>
+                <p className="mx-auto max-w-xl text-base text-foreground-muted sm:text-lg">
+                  A look at the platforms our team has designed, engineered, and shipped for founders and growing businesses.
+                </p>
+              </Reveal>
+            </div>
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
               {projects.map((p, i) => {
-                const card = (
+                const cardClass = "group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border-subtle bg-surface/60 hover:border-gold-400";
+                const inner = (
                   <>
-                    <div className="relative aspect-[16/10] overflow-hidden border-b border-border-subtle bg-elevated">
-                      <Image src={p.image} alt={`${p.name} product screenshot`} fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover object-top transition-transform duration-500 group-hover:scale-105" />
+                    <div className="relative h-48 overflow-hidden border-b border-border-subtle bg-background-elevated">
+                      <Image
+                        alt={`${p.name} product screenshot`}
+                        fill
+                        sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                        className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                        src={p.image}
+                      />
                     </div>
-                    <div className="p-6">
-                      <div className="flex flex-wrap items-center gap-2 text-[10.5px] font-medium uppercase tracking-[0.18em] text-gold">
-                        <span>{p.tag}</span>
-                        {"badge" in p && p.badge && (
-                          <span className="rounded-full border border-border-subtle px-2 py-0.5 text-faint">{p.badge}</span>
+                    <div className="flex flex-1 flex-col gap-3 p-7">
+                      <div className="flex items-center justify-between gap-3">
+                        <span className="text-xs font-medium uppercase tracking-[0.15em] text-gold-bright">{p.tag}</span>
+                        {"badge" in p && p.badge ? (
+                          <span className="shrink-0 rounded-full border border-border-subtle px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-foreground-faint">
+                            {p.badge}
+                          </span>
+                        ) : (
+                          <ArrowUpRight className="h-4 w-4 shrink-0 text-foreground-faint transition-colors group-hover:text-gold-bright" aria-hidden="true" />
                         )}
                       </div>
-                      <h3 className="font-display mt-3 text-[22px] font-semibold">{p.name}</h3>
-                      <p className="mt-2.5 text-[13.5px] leading-relaxed text-muted">{p.body}</p>
+                      <h3 className="font-display text-2xl font-semibold tracking-tight">{p.name}</h3>
+                      <p className="text-sm leading-relaxed text-foreground-muted">{p.body}</p>
                     </div>
                   </>
                 );
-                const cls = "group block overflow-hidden rounded-[var(--radius-lg)] border border-border-subtle bg-surface transition-colors hover:border-border-strong";
                 return (
-                  <Reveal key={p.name} delay={i * 100}>
+                  <Reveal key={p.name} delay={i * 0.1}>
                     {p.href ? (
-                      <a href={p.href} target="_blank" rel="noreferrer" className={cls}>{card}</a>
+                      <a href={p.href} target="_blank" rel="noopener noreferrer" className={cardClass}>{inner}</a>
                     ) : (
-                      <div className={cls}>{card}</div>
+                      <div className={cardClass}>{inner}</div>
                     )}
                   </Reveal>
                 );
@@ -200,28 +320,28 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Closing CTA */}
-        <section className="py-16">
-          <div className={container}>
-            <Reveal className="relative overflow-hidden rounded-[var(--radius-xl)] border border-border-subtle bg-surface px-6 py-24 text-center">
-              <div className="grid-bg absolute inset-0" aria-hidden />
-              <div className="glow absolute inset-0" aria-hidden />
-              <div className="relative">
-                <h2 className="font-display mx-auto max-w-lg text-4xl font-semibold leading-[1.08] sm:text-5xl">
+        {/* Contact / CTA */}
+        <section id="contact" className="relative scroll-mt-24 px-6 py-20 sm:py-28">
+          <Reveal className="mx-auto w-full max-w-7xl">
+            <div className="relative overflow-hidden rounded-[2rem] border border-border-strong bg-background-elevated px-8 py-16 text-center sm:px-16 sm:py-24">
+              <div aria-hidden="true" className="bg-grid pointer-events-none absolute inset-0 opacity-60 [mask-image:radial-gradient(ellipse_70%_70%_at_50%_50%,black,transparent)]" />
+              <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-1/2 h-100 w-175 -translate-x-1/2 -translate-y-1/2 animate-glow-pulse rounded-full bg-gold/25 blur-[140px]" />
+              <div className="relative flex flex-col items-center gap-6">
+                <h2 className="font-display max-w-2xl text-3xl font-semibold tracking-tight text-balance sm:text-4xl lg:text-5xl">
                   Ready to build your next product?
                 </h2>
-                <p className="mx-auto mt-5 max-w-md text-[17px] text-muted">
-                  Tell us about your idea and we&apos;ll match you with the right person on our team.
+                <p className="max-w-lg text-lg text-foreground-muted">
+                  Book a free consultation and let&apos;s turn your idea into a product worth building.
                 </p>
-                <Link
-                  href={START_URL}
-                  className="mt-9 inline-flex items-center gap-2 rounded-full bg-gold px-7 py-3.5 text-[14px] font-semibold text-[#1a1408] transition-colors hover:bg-gold-bright"
-                >
-                  Start Your Project <ArrowRight className="h-4 w-4" />
-                </Link>
+                <Tap>
+                  <Link className={`${btnPrimary} mt-2 h-13 px-8 text-base`} href={START_URL}>
+                    Book a Free Consultation
+                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  </Link>
+                </Tap>
               </div>
-            </Reveal>
-          </div>
+            </div>
+          </Reveal>
         </section>
       </main>
       <Footer />
