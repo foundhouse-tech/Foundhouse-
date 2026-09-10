@@ -20,7 +20,9 @@ npm run build && npm run start
 | --- | --- |
 | `src/lib/site.ts` | `START_URL`, where the project CTAs point. |
 | `src/app/page.tsx` | Home page: hero, services, about, why, featured work, closing CTA. |
-| `src/app/start/page.tsx` | Project entry point. Phase 1 placeholder; the qualification form mounts here in Phase 2. |
+| `src/app/start/page.tsx` | Qualification form page. `/start/thanks` is the no-booking-URL fallback. |
+| `src/app/api/lead/route.ts` | Lead endpoint: validate, write to Notion, return booking redirect. |
+| `src/lib/form.ts` | Packages (tiers), service/intention/funding options, validation. |
 | `src/components/` | Header, Footer, motion (framer-motion reveals). |
 | `public/images/` | Logo, team photos, product screenshots. |
 
@@ -35,10 +37,22 @@ railway up              # build + deploy from this folder
 railway domain          # get / attach a public URL
 ```
 
-Optional env: `SITE_URL` (used for canonical/OG URLs; defaults to https://foundhouse.tech).
+## Environment variables (Railway → service → Variables)
+
+| Variable | Purpose |
+| --- | --- |
+| `NOTION_TOKEN` | Internal integration secret; the integration must be connected to the **Leads & Form Submissions** database. Without it, leads still route to booking but are not written to Notion. |
+| `BOOKING_URL_TIER1` | Google booking page for fullHouse leads (Greg). |
+| `BOOKING_URL_TIER2` | Google booking page for halfHouse leads (Grace). |
+| `BOOKING_URL_TIER3` | Google booking page for tinyHouse leads (Kam). Missing URL falls back to `/start/thanks`. |
+| `SITE_URL` | Optional; canonical/OG URLs, defaults to https://foundhouse.tech. |
+
+## Qualification form
+
+`/start` renders `QualificationForm`; submit POSTs to `/api/lead`, which validates, writes the lead to Notion (Package = tier, Services, Project intention, Funding situation, links, description, about), and returns the booking URL for the tier. Package definitions live in `src/lib/form.ts`.
 
 ## Roadmap
 
 1. ✅ Replicate current site, CTAs → `/start`
-2. Qualification form on `/start` → tier → booking page (see Notion Team HQ › Integrations & scripts)
-3. Booking pages per team member
+2. ✅ Qualification form on `/start` → tier → booking page
+3. Booking pages per team member (set the three `BOOKING_URL_TIER*` variables)
