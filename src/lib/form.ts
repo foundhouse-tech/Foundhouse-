@@ -20,8 +20,15 @@ export const packages: {
     tier: 1,
     name: "fullHouse",
     price: "$10,000/mo",
-    tagline: "Everything, under one roof.",
-    includes: ["All services", "End to end product development", "Go to market and social strategy", "Automation and analytics"],
+    tagline: "All services, under one roof.",
+    includes: [
+      "End to end product development",
+      "Maintenance",
+      "Go to market strategy",
+      "Social media launch strategy",
+      "Social media automation",
+      "Analytics capturing and analysis",
+    ],
     value: 10000,
   },
   {
@@ -29,8 +36,8 @@ export const packages: {
     tier: 2,
     name: "halfHouse",
     price: "$5,000/mo",
-    tagline: "A native platform, built end to end.",
-    includes: ["End to end platform development", "Replaces current maintenance fees and subscriptions with a native platform"],
+    tagline: "A native platform that replaces your maintenance fees and subscriptions.",
+    includes: ["End to end product development", "Maintenance"],
     value: 5000,
   },
   {
@@ -44,14 +51,10 @@ export const packages: {
   },
 ];
 
-export const services = [
-  "End to end product development",
-  "Maintenance",
-  "Go to market strategy",
-  "Social media launch strategy",
-  "Social media automation",
-  "Analytics capturing and analysis",
-] as const;
+/** Services are implied by the package; the tinyHouse package carries none. */
+export function servicesFor(pkg: PackageId): string[] {
+  return pkg === "tinyHouse" ? [] : packages.find((p) => p.id === pkg)?.includes ?? [];
+}
 
 export const intentions = [
   "Grow revenue of my business",
@@ -99,8 +102,6 @@ export function validateLead(input: unknown): { ok: true; data: LeadPayload } | 
   if (!name) errors.push("Name is required.");
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.push("A valid email is required.");
   if (!packages.some((p) => p.id === pkg)) errors.push("Choose a package.");
-  const svc = arr("services", services);
-  if (svc.length === 0) errors.push("Pick at least one service.");
   const intent = arr("intentions", intentions);
   if (intent.length === 0) errors.push("Tell us what the project is for.");
   if (!projectDescription) errors.push("Describe the project.");
@@ -113,7 +114,7 @@ export function validateLead(input: unknown): { ok: true; data: LeadPayload } | 
       email,
       company: str("company") || undefined,
       package: pkg,
-      services: svc,
+      services: servicesFor(pkg),
       intentions: intent,
       funding: arr("funding", fundingOptions),
       socialLinks: str("socialLinks") || undefined,
