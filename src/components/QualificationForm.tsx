@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { ArrowRight, Check } from "lucide-react";
-import { fundingOptions, intentions, packages, services, type PackageId } from "@/lib/form";
+import { fundingOptions, intentions, packages, type PackageId } from "@/lib/form";
 
 const field =
   "w-full rounded-lg border border-border-strong bg-background-elevated px-4 py-3 text-sm text-foreground placeholder:text-foreground-faint outline-none transition-colors focus:border-gold-400";
@@ -33,7 +33,6 @@ function toggle(list: string[], v: string) {
 
 export default function QualificationForm() {
   const [pkg, setPkg] = useState<PackageId | "">("");
-  const [svc, setSvc] = useState<string[]>([]);
   const [intent, setIntent] = useState<string[]>([]);
   const [funding, setFunding] = useState<string[]>([]);
   const [name, setName] = useState("");
@@ -58,7 +57,6 @@ export default function QualificationForm() {
           email,
           company,
           package: pkg,
-          services: svc,
           intentions: intent,
           funding,
           socialLinks,
@@ -115,19 +113,6 @@ export default function QualificationForm() {
               </button>
             );
           })}
-        </div>
-      </fieldset>
-
-      {/* Services */}
-      <fieldset className="flex flex-col gap-4">
-        <legend className={label}>Services</legend>
-        <p className={hint}>Select everything you need.</p>
-        <div className="flex flex-wrap gap-2">
-          {services.map((s) => (
-            <Chip key={s} active={svc.includes(s)} onClick={() => setSvc(toggle(svc, s))}>
-              {s}
-            </Chip>
-          ))}
         </div>
       </fieldset>
 
