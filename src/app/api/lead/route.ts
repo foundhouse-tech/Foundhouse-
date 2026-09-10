@@ -9,8 +9,19 @@ const NOTION_VERSION = "2025-09-03";
 const PERSON: Record<1 | 2 | 3, string> = { 1: "Greg", 2: "Grace", 3: "Kam" };
 const TIER_NAME: Record<1 | 2 | 3, string> = { 1: "Tier 1 - Greg", 2: "Tier 2 - Grace", 3: "Tier 3 - Kam" };
 
+/**
+ * Booking pages per tier. Env vars override; tier 3 (tinyHouse) has no booking
+ * page on purpose and lands on the "webinars coming soon" page instead.
+ */
+const DEFAULT_BOOKING: Record<1 | 2 | 3, string | undefined> = {
+  1: "https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ017b8HkZxwzHhFOrpUrx48hshnMlRPQIYa5XiqVUrQZ_Ow434X2fq_tPPpNlio7hFn-yIEyST1",
+  2: "https://calendar.app.google/QS5qNfzMXyrPbVPa7",
+  3: undefined,
+};
+
 function bookingUrlFor(tier: 1 | 2 | 3): string | null {
-  const url = { 1: process.env.BOOKING_URL_TIER1, 2: process.env.BOOKING_URL_TIER2, 3: process.env.BOOKING_URL_TIER3 }[tier];
+  const env = { 1: process.env.BOOKING_URL_TIER1, 2: process.env.BOOKING_URL_TIER2, 3: process.env.BOOKING_URL_TIER3 }[tier];
+  const url = env || DEFAULT_BOOKING[tier];
   return url && /^https?:\/\//.test(url) ? url : null;
 }
 
@@ -82,7 +93,7 @@ export async function POST(req: Request) {
   const booking = bookingUrlFor(tier);
   const redirect = booking
     ? `${booking}${booking.includes("?") ? "&" : "?"}email=${encodeURIComponent(v.data.email)}`
-    : `/start/thanks?tier=${tier}`;
+    : `/start/thanks?tier=${tier}&email=${encodeURIComponent(v.data.email)}`;
 
   return NextResponse.json({ ok: true, tier, person: PERSON[tier], redirect, notion });
 }
