@@ -3,14 +3,14 @@ import Link from "next/link";
 import {
   ArrowRight,
   ArrowUpRight,
-  BrainCircuit,
-  CodeXml,
-  Globe,
+  BarChart3,
   Handshake,
   Layers,
+  Rocket,
+  Share2,
   Smartphone,
-  Sparkles,
-  Zap,
+  Target,
+  Users,
 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -32,10 +32,10 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
 }
 
 const services = [
-  { Icon: BrainCircuit, title: "AI Solutions", body: "Custom AI products, LLM integrations, and intelligent automation that give your business a genuine edge." },
-  { Icon: CodeXml, title: "Custom Software", body: "Bespoke software engineered around how your business actually operates — not the other way around." },
-  { Icon: Globe, title: "Web Applications", body: "Fast, scalable, beautifully engineered web apps built on modern frameworks and best practices." },
-  { Icon: Smartphone, title: "Mobile Applications", body: "Native-feel mobile experiences for iOS and Android from a single, maintainable codebase." },
+  { Icon: Smartphone, title: "Mobile and Web App Development", body: "End to end development of mobile and web applications, from first concept through launch, with senior engineers on every build." },
+  { Icon: Rocket, title: "Go to Market Strategy", body: "Positioning, pricing, and launch plans built by people who have taken their own products to market." },
+  { Icon: Share2, title: "Social Media Automation", body: "Content pipelines and scheduling systems that keep your channels active without consuming your week." },
+  { Icon: BarChart3, title: "Analytics Capturing and Analysis", body: "Instrumentation that captures what users actually do, and reporting that turns it into decisions." },
 ];
 
 const team = [
@@ -56,10 +56,10 @@ const team = [
 ];
 
 const reasons = [
-  { Icon: Zap, title: "Fast Delivery", body: "Structured sprints and clear milestones mean your product ships on time." },
-  { Icon: Sparkles, title: "Modern Technology", body: "Battle-tested, current tools — no legacy stacks or outdated patterns." },
-  { Icon: Layers, title: "Scalable Solutions", body: "We build for where you're going, not just where you are today." },
-  { Icon: Handshake, title: "Long-Term Partnership", body: "We stay involved after launch — as a partner, not a vendor." },
+  { Icon: Users, title: "Built by Founders", body: "Foundhouse is led by tech startup owners who have shipped, sold, and scaled their own products." },
+  { Icon: Handshake, title: "Sales in the Room", body: "Sales experts sit alongside the engineers, so every build is shaped by how it will actually be sold." },
+  { Icon: Layers, title: "Stacked End to End", body: "Strategy, design, development, and launch on one team, with no handoffs between agencies." },
+  { Icon: Target, title: "Results Over Solutions", body: "We measure ourselves on the outcome your business gets, not on the technology we used to get there." },
 ];
 
 const projects = [
@@ -141,12 +141,12 @@ export default function Home() {
               </Reveal>
               <Reveal delay={0.1}>
                 <h2 className="font-display max-w-2xl text-3xl font-semibold tracking-tight text-balance sm:text-4xl lg:text-5xl">
-                  End-to-end product engineering, under one roof.
+                  Taking goals from first concept to execution.
                 </h2>
               </Reveal>
               <Reveal delay={0.2}>
                 <p className="mx-auto max-w-xl text-base text-foreground-muted sm:text-lg">
-                  From first concept to production launch, we bring the full range of skills founders need to ship something exceptional.
+                  Mobile and web app end to end development, plus the strategy, automation, and analytics that make a product succeed after launch.
                 </p>
               </Reveal>
             </div>
@@ -176,12 +176,12 @@ export default function Home() {
               </Reveal>
               <Reveal delay={0.1}>
                 <h2 className="font-display max-w-xl text-3xl font-semibold tracking-tight text-balance sm:text-4xl lg:text-5xl">
-                  We help founders turn ideas into successful digital products.
+                  A team of developers that understand your business.
                 </h2>
               </Reveal>
               <Reveal delay={0.2}>
                 <p className="max-w-lg text-base leading-relaxed text-foreground-muted sm:text-lg">
-                  Foundhouse is a software and development studio built for startups and growing businesses. We pair senior engineering with thoughtful design to build products on a foundation that lasts.
+                  Foundhouse is led by tech startup owners and sales experts, stacked end to end during product development. Dedicated to the results, not the solution.
                 </p>
               </Reveal>
             </div>
@@ -235,12 +235,12 @@ export default function Home() {
               </Reveal>
               <Reveal delay={0.1}>
                 <h2 className="font-display max-w-2xl text-3xl font-semibold tracking-tight text-balance sm:text-4xl lg:text-5xl">
-                  A studio built on trust and craft.
+                  A studio that runs like a startup.
                 </h2>
               </Reveal>
               <Reveal delay={0.2}>
                 <p className="mx-auto max-w-xl text-base text-foreground-muted sm:text-lg">
-                  We treat every engagement like it&apos;s our own product — because your success is how we measure ours.
+                  We treat every engagement like it&apos;s our own product, because your results are how we measure ours.
                 </p>
               </Reveal>
             </div>

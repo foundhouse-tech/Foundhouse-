@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* Design tokens — identical to the live foundhouse.tech stylesheet */
+/* Design tokens, identical to the live foundhouse.tech stylesheet */
 :root {
   --background: #08090c;
   --background-elevated: #0e1015;
