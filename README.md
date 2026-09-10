@@ -42,9 +42,9 @@ railway domain          # get / attach a public URL
 | Variable | Purpose |
 | --- | --- |
 | `NOTION_TOKEN` | Internal integration secret; the integration must be connected to the **Leads & Form Submissions** database. Without it, leads still route to booking but are not written to Notion. |
-| `BOOKING_URL_TIER1` | Google booking page for fullHouse leads (Greg). |
-| `BOOKING_URL_TIER2` | Google booking page for halfHouse leads (Grace). |
-| `BOOKING_URL_TIER3` | Google booking page for tinyHouse leads (Kam). Missing URL falls back to `/start/thanks`. |
+| `BOOKING_URL_TIER1` | Optional override; fullHouse booking page (default baked into `src/app/api/lead/route.ts`). |
+| `BOOKING_URL_TIER2` | Optional override; halfHouse booking page (default baked in). |
+| `BOOKING_URL_TIER3` | Optional; tinyHouse has no booking page and lands on `/start/thanks?tier=3` (webinars soon + email updates opt-in via `/api/subscribe`). |
 | `SITE_URL` | Optional; canonical/OG URLs, defaults to https://foundhouse.tech. |
 
 ## Qualification form
@@ -55,4 +55,4 @@ railway domain          # get / attach a public URL
 
 1. ✅ Replicate current site, CTAs → `/start`
 2. ✅ Qualification form on `/start` → tier → booking page
-3. Booking pages per team member (set the three `BOOKING_URL_TIER*` variables)
+3. ✅ Booking pages: tier 1 and 2 go to Google booking pages; tier 3 gets the webinar notice + email updates
