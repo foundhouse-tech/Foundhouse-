@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Foundhouse site
 
-## Getting Started
+Marketing site for [foundhouse.tech](https://foundhouse.tech), rebuilt as a Next.js app and deployed on Railway.
 
-First, run the development server:
+## Stack
+
+Next.js (App Router, TypeScript), Tailwind CSS v4, `next/font` for Inter + Manrope. No database, no external services, a single Node process.
+
+## Local
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build && npm run start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Path | What |
+| --- | --- |
+| `src/lib/site.ts` | `START_URL`, where the project CTAs point. |
+| `src/app/page.tsx` | Home page: hero, services, about, why, featured work, closing CTA. |
+| `src/app/start/page.tsx` | Qualification form page. `/start/thanks` is the no-booking-URL fallback. |
+| `src/app/api/lead/route.ts` | Lead endpoint: validate, write to Notion, return booking redirect. |
+| `src/lib/form.ts` | Packages (tiers), service/intention/funding options, validation. |
+| `src/components/` | Header, Footer, motion (framer-motion reveals). |
+| `public/images/` | Logo, team photos, product screenshots. |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Deploy (Railway)
 
-## Learn More
+`railway.json` sets the build/start commands and a `/` health check. Railway injects `PORT`; `next start` reads it automatically.
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+railway login
+railway init            # create the project (first time)
+railway up              # build + deploy from this folder
+railway domain          # get / attach a public URL
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Environment variables (Railway → service → Variables)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Variable | Purpose |
+| --- | --- |
+| `NOTION_TOKEN` | Internal integration secret; the integration must be connected to the **Leads & Form Submissions** database. Without it, leads still route to booking but are not written to Notion. |
+| `BOOKING_URL_TIER1` | Optional override; fullHouse booking page (default baked into `src/app/api/lead/route.ts`). |
+| `BOOKING_URL_TIER2` | Optional override; halfHouse booking page (default baked in). |
+| `BOOKING_URL_TIER3` | Optional; tinyHouse has no booking page and lands on `/start/thanks?tier=3` (webinars soon + email updates opt-in via `/api/subscribe`). |
+| `SITE_URL` | Optional; canonical/OG URLs, defaults to https://foundhouse.tech. |
 
-## Deploy on Vercel
+## Qualification form
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+`/start` renders `QualificationForm`; submit POSTs to `/api/lead`, which validates, writes the lead to Notion (Package = tier, Services, Project intention, Funding situation, links, description, about), and returns the booking URL for the tier. Package definitions live in `src/lib/form.ts`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Roadmap
+
+1. ✅ Replicate current site, CTAs → `/start`
+2. ✅ Qualification form on `/start` → tier → booking page
+3. ✅ Booking pages: tier 1 and 2 go to Google booking pages; tier 3 gets the webinar notice + email updates
