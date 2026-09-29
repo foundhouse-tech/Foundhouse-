@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { bookingUrlFor } from "@/lib/booking";
 import { packages, tierFor, validateLead, type LeadPayload } from "@/lib/form";
 
 export const runtime = "nodejs";
@@ -8,22 +9,6 @@ const NOTION_VERSION = "2025-09-03";
 
 const PERSON: Record<1 | 2 | 3, string> = { 1: "Greg", 2: "Grace", 3: "Kam" };
 const TIER_NAME: Record<1 | 2 | 3, string> = { 1: "Tier 1 - Greg", 2: "Tier 2 - Grace", 3: "Tier 3 - Kam" };
-
-/**
- * Booking pages per tier. Env vars override; tier 3 (tinyHouse) has no booking
- * page on purpose and lands on the "webinars coming soon" page instead.
- */
-const DEFAULT_BOOKING: Record<1 | 2 | 3, string | undefined> = {
-  1: "https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ017b8HkZxwzHhFOrpUrx48hshnMlRPQIYa5XiqVUrQZ_Ow434X2fq_tPPpNlio7hFn-yIEyST1",
-  2: "https://calendar.app.google/QS5qNfzMXyrPbVPa7",
-  3: undefined,
-};
-
-function bookingUrlFor(tier: 1 | 2 | 3): string | null {
-  const env = { 1: process.env.BOOKING_URL_TIER1, 2: process.env.BOOKING_URL_TIER2, 3: process.env.BOOKING_URL_TIER3 }[tier];
-  const url = env || DEFAULT_BOOKING[tier];
-  return url && /^https?:\/\//.test(url) ? url : null;
-}
 
 const rt = (s?: string) => ({ rich_text: s ? [{ text: { content: s.slice(0, 2000) } }] : [] });
 const ms = (v: string[]) => ({ multi_select: v.map((name) => ({ name })) });
@@ -90,10 +75,11 @@ export async function POST(req: Request) {
     notion = { error: String(e) };
   }
 
-  const booking = bookingUrlFor(tier);
-  const redirect = booking
-    ? `${booking}${booking.includes("?") ? "&" : "?"}email=${encodeURIComponent(v.data.email)}`
-    : `/start/thanks?tier=${tier}&email=${encodeURIComponent(v.data.email)}`;
+  // Tiers with a booking page stay on-site: /start/brainstorm embeds the
+  // calendar, then collects brainstorm details onto this same Notion lead.
+  const qs = new URLSearchParams({ tier: String(tier), email: v.data.email });
+  if ("id" in notion && notion.id) qs.set("lead", notion.id);
+  const redirect = bookingUrlFor(tier) ? `/start/brainstorm?${qs}` : `/start/thanks?${qs}`;
 
   return NextResponse.json({ ok: true, tier, person: PERSON[tier], redirect, notion });
 }
