@@ -7,6 +7,7 @@ import EmailUpdates from "@/components/EmailUpdates";
 export const metadata: Metadata = {
   title: "Thanks | Foundhouse",
   description: "We received your project details.",
+  robots: { index: false },
 };
 
 const PERSON: Record<string, string> = { "1": "Greg", "2": "Grace", "3": "Kam" };

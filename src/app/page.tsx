@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -17,7 +18,13 @@ import {
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { HeroGlow, HeroItem, Reveal, Tap } from "@/components/motion";
+import { FaqAccordion, FaqJsonLd } from "@/components/Faq";
+import { allFaqs } from "@/lib/faq";
 import { START_URL } from "@/lib/site";
+
+export const metadata: Metadata = { alternates: { canonical: "/" } };
+
+const homeFaqs = allFaqs.filter((f) => f.home);
 
 const btnPrimary =
   "group inline-flex h-12 items-center justify-center gap-2 whitespace-nowrap rounded-full px-6 text-sm font-medium transition-all duration-300 active:scale-[0.98] bg-gold text-background hover:bg-gold-bright hover:shadow-[0_0_24px_4px_rgba(205,154,77,0.35)]";
@@ -352,6 +359,44 @@ export default function Home() {
               ))}
             </div>
           </div>
+        </section>
+
+        {/* FAQ */}
+        <section id="faq" className="relative scroll-mt-24 overflow-hidden py-28 sm:py-36">
+          <div aria-hidden="true" className="pointer-events-none absolute left-0 top-1/3 h-96 w-96 rounded-full bg-gold/10 blur-[140px]" />
+          <div className="relative mx-auto flex w-full max-w-3xl flex-col gap-12 px-6 lg:px-10">
+            <div className="flex flex-col items-center gap-5 text-center">
+              <Reveal>
+                <Eyebrow>FAQ</Eyebrow>
+              </Reveal>
+              <Reveal delay={0.1}>
+                <h2 className="font-display max-w-2xl text-3xl font-semibold tracking-tight text-balance sm:text-4xl lg:text-5xl">
+                  Questions founders ask before they build.
+                </h2>
+              </Reveal>
+              <Reveal delay={0.2}>
+                <p className="mx-auto max-w-xl text-base text-foreground-muted sm:text-lg">
+                  Straight answers on pricing, process, and what we build.
+                </p>
+              </Reveal>
+            </div>
+            <FaqAccordion items={homeFaqs} />
+            <Reveal className="flex flex-col items-center gap-4 text-center">
+              <Tap>
+                <Link className={btnSecondary} href="/faq">
+                  See all questions
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </Link>
+              </Tap>
+              <p className="text-sm text-foreground-faint">
+                Still have a question?{" "}
+                <Link href={START_URL} className="text-gold-bright hover:text-foreground">
+                  Tell us what you&apos;re building
+                </Link>
+              </p>
+            </Reveal>
+          </div>
+          <FaqJsonLd items={homeFaqs} />
         </section>
 
         {/* Contact / CTA */}

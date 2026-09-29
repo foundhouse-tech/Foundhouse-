@@ -2,10 +2,15 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import QualificationForm from "@/components/QualificationForm";
+import { FaqAccordion, FaqJsonLd } from "@/components/Faq";
+import { allFaqs } from "@/lib/faq";
+
+const startFaqs = allFaqs.filter((f) => f.start);
 
 export const metadata: Metadata = {
   title: "Book a Consultation | Foundhouse",
   description: "Tell us about your project and we'll match you with the right person on the Foundhouse team.",
+  alternates: { canonical: "/start" },
 };
 
 export default function StartPage() {
@@ -32,8 +37,13 @@ export default function StartPage() {
             <div className="w-full rounded-[2rem] border border-border-strong bg-background-elevated px-6 py-10 sm:px-12 sm:py-14">
               <QualificationForm />
             </div>
+            <div className="mt-8 flex w-full max-w-3xl flex-col gap-6">
+              <h2 className="text-center text-xs font-medium uppercase tracking-[0.15em] text-gold-bright">Questions about the packages</h2>
+              <FaqAccordion items={startFaqs} firstOpen={false} />
+            </div>
           </div>
         </section>
+        <FaqJsonLd items={startFaqs} />
       </main>
       <Footer />
     </>

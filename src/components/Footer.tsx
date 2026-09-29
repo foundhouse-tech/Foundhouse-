@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -11,9 +12,10 @@ export default function Footer() {
           <span className="font-display text-lg font-semibold tracking-tight">Foundhouse</span>
         </div>
         <nav className="flex items-center gap-6">
-          <a href="#services" className="text-sm text-foreground-muted hover:text-gold-bright">Services</a>
-          <a href="#about" className="text-sm text-foreground-muted hover:text-gold-bright">About</a>
-          <a href="#contact" className="text-sm text-foreground-muted hover:text-gold-bright">Contact</a>
+          <Link href="/#services" className="text-sm text-foreground-muted hover:text-gold-bright">Services</Link>
+          <Link href="/#about" className="text-sm text-foreground-muted hover:text-gold-bright">About</Link>
+          <Link href="/faq" className="text-sm text-foreground-muted hover:text-gold-bright">FAQ</Link>
+          <Link href="/#contact" className="text-sm text-foreground-muted hover:text-gold-bright">Contact</Link>
         </nav>
         <a href="mailto:teamfoundhouse@gmail.com" className="text-sm font-medium text-foreground-muted hover:text-gold-bright">
           teamfoundhouse@gmail.com

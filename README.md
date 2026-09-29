@@ -19,7 +19,10 @@ npm run build && npm run start
 | Path | What |
 | --- | --- |
 | `src/lib/site.ts` | `START_URL`, where the project CTAs point. |
-| `src/app/page.tsx` | Home page: hero + testimonial, showcase video, featured work, services, about, why, closing CTA. |
+| `src/app/page.tsx` | Home page: hero + testimonial, showcase video, featured work, services, about, why, FAQ (6), closing CTA. |
+| `src/app/faq/page.tsx` | Full FAQ (14 questions, 4 groups) with FAQPage JSON-LD. |
+| `src/lib/faq.ts` | FAQ copy; drives the accordion and the JSON-LD so they always match. `home`/`start` flags pick the subsets shown on those pages. |
+| `src/app/sitemap.ts`, `robots.ts` | Sitemap (/, /faq, /start) and robots rules. |
 | `src/app/start/page.tsx` | Qualification form page. `/start/thanks` is the no-booking-URL fallback. |
 | `src/app/start/brainstorm/page.tsx` | Post-form page for tiers 1 and 2: embedded booking calendar, then the brainstorm form. |
 | `src/app/api/lead/route.ts` | Lead endpoint: validate, write to Notion, return the `/start/brainstorm` redirect. |

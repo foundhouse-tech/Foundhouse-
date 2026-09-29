@@ -6,9 +6,10 @@ import { useState } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 
 const nav = [
-  { label: "Services", href: "#services" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
+  { label: "Services", href: "/#services" },
+  { label: "About", href: "/#about" },
+  { label: "FAQ", href: "/faq" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 export default function Header() {
@@ -24,19 +25,19 @@ export default function Header() {
         </Link>
         <nav className="hidden items-center gap-1 md:flex">
           {nav.map((n) => (
-            <a key={n.href} href={n.href} className="rounded-full px-4 py-2 text-sm font-medium text-foreground-muted transition-colors hover:text-foreground">
+            <Link key={n.href} href={n.href} className="rounded-full px-4 py-2 text-sm font-medium text-foreground-muted transition-colors hover:text-foreground">
               {n.label}
-            </a>
+            </Link>
           ))}
         </nav>
         <div className="hidden md:block">
-          <a
+          <Link
             className="group inline-flex h-12 items-center justify-center gap-2 whitespace-nowrap rounded-full px-6 text-sm font-medium transition-all duration-300 active:scale-[0.98] bg-gold text-background hover:bg-gold-bright hover:shadow-[0_0_24px_4px_rgba(205,154,77,0.35)]"
-            href="#contact"
+            href="/#contact"
           >
             Get Started
             <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-          </a>
+          </Link>
         </div>
         <button
           type="button"
@@ -51,23 +52,23 @@ export default function Header() {
         <div className="mx-6 mt-2 rounded-2xl border border-border-subtle bg-background p-4 shadow-xl md:hidden">
           <nav className="flex flex-col gap-1">
             {nav.map((n) => (
-              <a
+              <Link
                 key={n.href}
                 href={n.href}
                 onClick={() => setOpen(false)}
                 className="rounded-lg px-4 py-3 text-base font-medium text-foreground-muted hover:bg-surface-hover hover:text-foreground"
               >
                 {n.label}
-              </a>
+              </Link>
             ))}
-            <a
-              href="#contact"
+            <Link
+              href="/#contact"
               onClick={() => setOpen(false)}
               className="group mt-2 inline-flex h-12 items-center justify-center gap-2 whitespace-nowrap rounded-full px-6 text-sm font-medium transition-all duration-300 active:scale-[0.98] bg-gold text-background hover:bg-gold-bright"
             >
               Get Started
               <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-            </a>
+            </Link>
           </nav>
         </div>
       )}
