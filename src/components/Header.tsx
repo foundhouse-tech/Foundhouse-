@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 
@@ -15,12 +16,12 @@ export default function Header() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-6 py-5">
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between rounded-2xl border border-border-subtle bg-background/70 px-4 py-2.5 backdrop-blur-xl">
-        <a href="#" className="flex items-center gap-2.5">
+        <Link href="/" className="flex items-center gap-2.5">
           <span className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-md bg-[#fafaf8]">
             <Image alt="" width={32} height={32} className="h-full w-full object-contain" src="/images/logo.png" priority />
           </span>
           <span className="font-display text-lg font-semibold tracking-tight">Foundhouse</span>
-        </a>
+        </Link>
         <nav className="hidden items-center gap-1 md:flex">
           {nav.map((n) => (
             <a key={n.href} href={n.href} className="rounded-full px-4 py-2 text-sm font-medium text-foreground-muted transition-colors hover:text-foreground">

@@ -16,7 +16,7 @@ export default function StartPage() {
         <section className="relative overflow-hidden pt-36 pb-24 sm:pt-40">
           <div aria-hidden="true" className="bg-grid pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_70%_60%_at_50%_0%,black,transparent)]" />
           <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-[-18%] h-140 w-225 -translate-x-1/2 rounded-full bg-gold/25 blur-[150px]" />
-          <div className="relative mx-auto flex w-full max-w-4xl flex-col items-center gap-8 px-6 lg:px-10">
+          <div className="relative mx-auto flex w-full max-w-5xl flex-col items-center gap-8 px-6 lg:px-10">
             <div className="flex flex-col items-center gap-5 text-center">
               <div className="inline-flex items-center gap-2 rounded-full border border-border-strong bg-surface/60 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-gold-bright">
                 <span className="h-1.5 w-1.5 rounded-full bg-gold" />
